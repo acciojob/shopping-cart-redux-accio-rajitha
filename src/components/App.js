@@ -52,28 +52,16 @@ const App = () => {
 
   return (
     <div className="app">
-      <header className="navbar">
-        <h1 className="navbar-title">Shopping Cart App</h1>
-        <nav className="navbar-links">
-          <button
-            className="navbar-link"
-            id="home-link"
-            onClick={() => setCurrentView("home")}
-          >
+      <header className="header">
+        <h1 className="app-title">Shopping Cart App</h1>
+        <nav className="navbar">
+          <button onClick={() => setCurrentView("home")} className="navbar-btn">
             Home
           </button>
-          <button
-            className="navbar-link"
-            id="cart-link"
-            onClick={() => setCurrentView("cart")}
-          >
+          <button onClick={() => setCurrentView("cart")} className="navbar-btn">
             Cart
           </button>
-          <button
-            className="navbar-link"
-            id="wishlist-link"
-            onClick={() => setCurrentView("wishlist")}
-          >
+          <button onClick={() => setCurrentView("wishlist")} className="navbar-btn">
             Wishlist
           </button>
         </nav>
@@ -83,19 +71,19 @@ const App = () => {
         <div className="product-list">
           <h2>Products</h2>
           {products.map((product) => (
-            <div key={product.id} className="custom-card product-card">
-              <img src={product.image} alt={product.name} className="product-image" />
-              <h3 className="product-name">{product.name}</h3>
-              <p className="product-price">${product.price}</p>
+            <div key={product.id} className="product-card">
+              <img src={product.image} alt={product.name} />
+              <h3>{product.name}</h3>
+              <p>${product.price}</p>
               <button
-                className="btn btn-primary add-to-cart-btn"
                 onClick={() => handleAddToCart(product)}
+                className="btn-add-cart"
               >
                 Add to Cart
               </button>
               <button
-                className="btn btn-secondary add-to-wishlist-btn"
                 onClick={() => handleAddToWishlist(product)}
+                className="btn-add-wishlist"
               >
                 Add to Wishlist
               </button>
@@ -109,52 +97,37 @@ const App = () => {
           <h2>Shopping Cart</h2>
           {cart.length > 0 ? (
             <>
-              <ul className="cart-list">
+              <ul>
                 {cart.map((item) => (
-                  <li key={item.id} className="cart-item">
+                  <li key={item.id}>
                     {item.name} - ${item.price} - Quantity: {item.quantity}
-                    <button
-                      className="btn increase-quantity-btn"
-                      onClick={() => handleIncreaseQuantity(item)}
-                    >
+                    <button onClick={() => handleIncreaseQuantity(item)}>
                       +
                     </button>
-                    <button
-                      className="btn decrease-quantity-btn"
-                      onClick={() => handleDecreaseQuantity(item)}
-                    >
+                    <button onClick={() => handleDecreaseQuantity(item)}>
                       -
                     </button>
-                    <button
-                      className="btn remove-from-cart-btn"
-                      onClick={() => handleRemoveFromCart(item)}
-                    >
+                    <button onClick={() => handleRemoveFromCart(item)}>
                       Remove
                     </button>
                   </li>
                 ))}
               </ul>
-              <div className="cart-summary">
+              <div>
                 <h3>Total: ${calculateTotal()}</h3>
                 <h3>Discount Applied: {discount}%</h3>
                 <h3>Final Total: ${finalTotal.toFixed(2)}</h3>
                 <input
                   type="text"
-                  className="coupon-input"
                   value={couponCode}
                   onChange={(e) => setCouponCode(e.target.value)}
                   placeholder="Enter coupon code"
                 />
-                <button
-                  className="btn apply-discount-btn"
-                  onClick={handleApplyDiscount}
-                >
-                  Apply Discount
-                </button>
+                <button onClick={handleApplyDiscount}>Apply Discount</button>
               </div>
             </>
           ) : (
-            <p className="empty-cart-msg">Your cart is empty.</p>
+            <p>Your cart is empty.</p>
           )}
         </div>
       )}
@@ -163,27 +136,21 @@ const App = () => {
         <div className="wishlist">
           <h2>Wishlist</h2>
           {wishlist.length > 0 ? (
-            <ul className="wishlist-list">
+            <ul>
               {wishlist.map((item) => (
-                <li key={item.id} className="wishlist-item">
+                <li key={item.id}>
                   {item.name} - ${item.price}
-                  <button
-                    className="btn move-to-cart-btn"
-                    onClick={() => handleMoveToCart(item)}
-                  >
+                  <button onClick={() => handleMoveToCart(item)}>
                     Move to Cart
                   </button>
-                  <button
-                    className="btn remove-from-wishlist-btn"
-                    onClick={() => handleRemoveFromWishlist(item)}
-                  >
+                  <button onClick={() => handleRemoveFromWishlist(item)}>
                     Remove
                   </button>
                 </li>
               ))}
             </ul>
           ) : (
-            <p className="empty-wishlist-msg">Your wishlist is empty.</p>
+            <p>Your wishlist is empty.</p>
           )}
         </div>
       )}
