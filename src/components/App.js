@@ -52,6 +52,200 @@ const App = () => {
 
   return (
     <div className="app">
+      <header className="navbar">
+        <h1 className="navbar-title">Shopping Cart App</h1>
+        <nav className="navbar-links">
+          <button
+            className="navbar-link"
+            id="home-link"
+            onClick={() => setCurrentView("home")}
+          >
+            Home
+          </button>
+          <button
+            className="navbar-link"
+            id="cart-link"
+            onClick={() => setCurrentView("cart")}
+          >
+            Cart
+          </button>
+          <button
+            className="navbar-link"
+            id="wishlist-link"
+            onClick={() => setCurrentView("wishlist")}
+          >
+            Wishlist
+          </button>
+        </nav>
+      </header>
+
+      {currentView === "home" && (
+        <div className="product-list">
+          <h2>Products</h2>
+          {products.map((product) => (
+            <div key={product.id} className="custom-card product-card">
+              <img src={product.image} alt={product.name} className="product-image" />
+              <h3 className="product-name">{product.name}</h3>
+              <p className="product-price">${product.price}</p>
+              <button
+                className="btn btn-primary add-to-cart-btn"
+                onClick={() => handleAddToCart(product)}
+              >
+                Add to Cart
+              </button>
+              <button
+                className="btn btn-secondary add-to-wishlist-btn"
+                onClick={() => handleAddToWishlist(product)}
+              >
+                Add to Wishlist
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {currentView === "cart" && (
+        <div className="cart">
+          <h2>Shopping Cart</h2>
+          {cart.length > 0 ? (
+            <>
+              <ul className="cart-list">
+                {cart.map((item) => (
+                  <li key={item.id} className="cart-item">
+                    {item.name} - ${item.price} - Quantity: {item.quantity}
+                    <button
+                      className="btn increase-quantity-btn"
+                      onClick={() => handleIncreaseQuantity(item)}
+                    >
+                      +
+                    </button>
+                    <button
+                      className="btn decrease-quantity-btn"
+                      onClick={() => handleDecreaseQuantity(item)}
+                    >
+                      -
+                    </button>
+                    <button
+                      className="btn remove-from-cart-btn"
+                      onClick={() => handleRemoveFromCart(item)}
+                    >
+                      Remove
+                    </button>
+                  </li>
+                ))}
+              </ul>
+              <div className="cart-summary">
+                <h3>Total: ${calculateTotal()}</h3>
+                <h3>Discount Applied: {discount}%</h3>
+                <h3>Final Total: ${finalTotal.toFixed(2)}</h3>
+                <input
+                  type="text"
+                  className="coupon-input"
+                  value={couponCode}
+                  onChange={(e) => setCouponCode(e.target.value)}
+                  placeholder="Enter coupon code"
+                />
+                <button
+                  className="btn apply-discount-btn"
+                  onClick={handleApplyDiscount}
+                >
+                  Apply Discount
+                </button>
+              </div>
+            </>
+          ) : (
+            <p className="empty-cart-msg">Your cart is empty.</p>
+          )}
+        </div>
+      )}
+
+      {currentView === "wishlist" && (
+        <div className="wishlist">
+          <h2>Wishlist</h2>
+          {wishlist.length > 0 ? (
+            <ul className="wishlist-list">
+              {wishlist.map((item) => (
+                <li key={item.id} className="wishlist-item">
+                  {item.name} - ${item.price}
+                  <button
+                    className="btn move-to-cart-btn"
+                    onClick={() => handleMoveToCart(item)}
+                  >
+                    Move to Cart
+                  </button>
+                  <button
+                    className="btn remove-from-wishlist-btn"
+                    onClick={() => handleRemoveFromWishlist(item)}
+                  >
+                    Remove
+                  </button>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="empty-wishlist-msg">Your wishlist is empty.</p>
+          )}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default App;
+/*
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  addToCart,
+  removeFromCart,
+  addToWishlist,
+  removeFromWishlist,
+  increaseQuantity,
+  decreaseQuantity,
+  applyDiscount,
+} from "./actions";
+import { products } from "./products";
+import "../styles/App.css";
+
+const App = () => {
+  const [currentView, setCurrentView] = useState("home");
+  const [couponCode, setCouponCode] = useState("");
+
+  const dispatch = useDispatch();
+  const { cart, wishlist, discount } = useSelector((state) => state);
+
+  const handleAddToCart = (product) => {
+    dispatch(addToCart(product));
+  };
+
+  const handleMoveToCart = (product) => {
+    dispatch(addToCart(product));
+    dispatch(removeFromWishlist(product));
+  };
+
+  const handleRemoveFromCart = (product) => dispatch(removeFromCart(product));
+  const handleIncreaseQuantity = (product) => dispatch(increaseQuantity(product));
+  const handleDecreaseQuantity = (product) => dispatch(decreaseQuantity(product));
+  const handleAddToWishlist = (product) => dispatch(addToWishlist(product));
+  const handleRemoveFromWishlist = (product) => dispatch(removeFromWishlist(product));
+
+  const handleApplyDiscount = () => {
+    if (couponCode === "SAVE10") {
+      dispatch(applyDiscount(10));
+    } else if (couponCode === "SAVE20") {
+      dispatch(applyDiscount(20));
+    } else {
+      alert("Invalid coupon code!");
+    }
+  };
+
+  const calculateTotal = () =>
+    cart.reduce((total, item) => total + item.price * item.quantity, 0);
+
+  const finalTotal = calculateTotal() * ((100 - discount) / 100);
+
+  return (
+    <div className="app">
       <header>
         <h1>Shopping Cart App</h1>
         <nav>
