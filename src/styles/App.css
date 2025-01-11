@@ -5,6 +5,182 @@
     margin: 0;
     padding: 0;
 }
+/* Styling for main app components */
+.app {
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+  }
+  
+  .app-header {
+    background-color: black;
+    color: white;
+    padding: 20px;
+    position: sticky;
+    top: 0;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .app-title {
+    font-size: 24px;
+  }
+  
+  .app-nav {
+    margin-top: 10px;
+  }
+  
+  .nav-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    margin: 5px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .nav-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .product-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .product-list-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .product-card {
+    width: 200px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .product-image {
+    width: 100%;
+    height: auto;
+  }
+  
+  .product-name {
+    font-size: 18px;
+    margin: 10px 0;
+  }
+  
+  .product-price {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .btn {
+    width: 100%;
+    padding: 10px;
+    margin: 5px;
+  }
+  
+  .cart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .cart-title {
+    font-size: 24px;
+  }
+  
+  .cart-items {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .cart-summary {
+    margin-top: 20px;
+  }
+  
+  .coupon-input {
+    padding: 10px;
+    margin: 10px 0;
+  }
+  
+  .apply-discount-btn {
+    width: 100%;
+  }
+  
+  .wishlist {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .wishlist-title {
+    font-size: 24px;
+  }
+  
+  .wishlist-items {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .wishlist-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .custom-card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .add-to-cart-btn,
+  .add-to-wishlist-btn,
+  .increase-quantity-btn,
+  .decrease-quantity-btn,
+  .remove-from-cart-btn,
+  .move-to-cart-btn,
+  .remove-from-wishlist-btn,
+  .apply-discount-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .add-to-cart-btn:hover,
+  .add-to-wishlist-btn:hover,
+  .increase-quantity-btn:hover,
+  .decrease-quantity-btn:hover,
+  .remove-from-cart-btn:hover,
+  .move-to-cart-btn:hover,
+  .remove-from-wishlist-btn:hover,
+  .apply-discount-btn:hover {
+    background-color: #0056b3;
+  }
+/*  
 .app {
     font-family: Arial, sans-serif;
     padding: 20px;
@@ -106,4 +282,4 @@
   .cart-item, .wishlist-item {
     margin: 10px 0;
   }
-  
+  */
